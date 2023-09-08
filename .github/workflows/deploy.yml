@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy via FTP
-        uses: w3reality/github-action-ftp-sync@master
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: nexx.lobofoltran.com
+          server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
+          local-dir: /
           remote-dir: /
