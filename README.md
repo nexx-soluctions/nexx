@@ -1,6 +1,8 @@
 # NEXX PROJECT
 
-Teste
+[![Actions Status](https://github.com/lobofoltran/nexx/workflows/deploy/badge.svg)](https://github.com/lobofoltran/nexx/actions)
+[![Actions Status](https://github.com/lobofoltran/nexx/workflows/laravel/badge.svg)](https://github.com/lobofoltran/nexx/actions)
+[![Actions Status](https://github.com/lobofoltran/nexx/workflows/ci/badge.svg)](https://github.com/lobofoltran/nexx/actions)
 
 Link web: [Link](https://nexx.lobofoltran.com "Link")
 
