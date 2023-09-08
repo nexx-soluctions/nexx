@@ -3,20 +3,12 @@
 namespace App\Filament\Resources\ChamadoResource\Pages;
 
 use App\Filament\Resources\ChamadoResource;
-use App\Filament\Widgets\BlogPostsChart;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListChamados extends ListRecords
+class ManageChamados extends ManageRecords
 {
     protected static string $resource = ChamadoResource::class;
-
-    protected function getFooterWidgets(): array
-    {
-        return [
-            BlogPostsChart::class,
-        ];
-    }
 
     protected function getHeaderActions(): array
     {
