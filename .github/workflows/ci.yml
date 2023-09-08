@@ -18,6 +18,9 @@ jobs:
       - name: Setup Dependencies
         uses: "ramsey/composer-install@v2"
   
+      - name: Generate key
+        run: php artisan key:generate
+
       - name: Prepare Laravel Application
         run: |
           cp .env.ci .env
