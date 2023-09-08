@@ -23,8 +23,8 @@ jobs:
 
       - name: Setup Dependencies
         run: | 
-          composer install --ignore-platform-reqs
           npm install
+          composer install --ignore-platform-reqs
 
         # - name: Setup Dependencies
         #   uses: "ramsey/composer-install@v2"
