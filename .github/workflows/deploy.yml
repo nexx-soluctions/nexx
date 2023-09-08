@@ -1,0 +1,23 @@
+name: Deploy FTP
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy via FTP
+        uses: w3reality/github-action-ftp-sync@master
+        with:
+          server: nexx.lobofoltran.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          remote-dir: /
