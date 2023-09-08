@@ -16,24 +16,21 @@ jobs:
 
       - uses: actions/setup-node@master
 
+      - name: Building frontend dependencies
+        run: |
+          npm install
+          npm run build
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.2"
 
       - name: Setup Dependencies
-        run: | 
-          npm install
-          composer install --ignore-platform-reqs
-
-        # - name: Setup Dependencies
-        #   uses: "ramsey/composer-install@v2"
+        run:  composer install --ignore-platform-reqs
 
       - name: Setup Permissions
         run: chmod -R 777 storage bootstrap/cache
-
-      - name: Building frontend dependencies
-        run: npm run build
 
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
