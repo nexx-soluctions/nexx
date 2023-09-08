@@ -1,8 +1,6 @@
 # Nexx
 
 [![CI](https://github.com/lobofoltran/nexx/workflows/CI/badge.svg)](https://github.com/lobofoltran/nexx/actions)
-[![Deploy](https://github.com/lobofoltran/nexx/workflows/Deploy%20FTP/badge.svg)](https://github.com/lobofoltran/nexx/actions)
-[![Test](https://github.com/lobofoltran/nexx/workflows/Laravel%20tests/badge.svg)](https://github.com/lobofoltran/nexx/actions)
 
 # Como testar a aplicação
 
