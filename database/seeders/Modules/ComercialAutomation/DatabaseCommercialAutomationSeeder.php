@@ -4,7 +4,7 @@ namespace Database\Seeders\Modules\ComercialAutomation;
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class DatabaseComercialAutomationSeeder extends Seeder
 {
     /**
      * Seed the application's database.
