@@ -1,10 +1,8 @@
-# NEXX PROJECT
+# Nexx
 
-[![Actions Status](https://github.com/lobofoltran/nexx/workflows/deploy/badge.svg)](https://github.com/lobofoltran/nexx/actions)
-[![Actions Status](https://github.com/lobofoltran/nexx/workflows/laravel/badge.svg)](https://github.com/lobofoltran/nexx/actions)
-[![Actions Status](https://github.com/lobofoltran/nexx/workflows/ci/badge.svg)](https://github.com/lobofoltran/nexx/actions)
-
-Link web: [Link](https://nexx.lobofoltran.com "Link")
+[![CI](https://github.com/lobofoltran/nexx/workflows/CI/badge.svg)](https://github.com/lobofoltran/nexx/actions)
+[![Deploy](https://github.com/lobofoltran/nexx/workflows/Deploy%20FTP/badge.svg)](https://github.com/lobofoltran/nexx/actions)
+[![Test](https://github.com/lobofoltran/nexx/workflows/Laravel%20tests/badge.svg)](https://github.com/lobofoltran/nexx/actions)
 
 # Como testar a aplicação
 
