@@ -1,6 +1,6 @@
 # NEXX PROJECT
 
-teste branch rule 2
+teste branch rule 3
 
 Link web: [Link](https://nexx.lobofoltran.com "Link")
 
