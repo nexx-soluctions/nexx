@@ -14,16 +14,36 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2.3.2
 
-      - name: Use Node.js 12
-        uses: actions/setup-node@v2-beta
+      - name: Configurar ambiente PHP
+        uses: shivammathur/setup-php@v2
         with:
-          node-version: '12'
+          php-version: 8.2
   
-      - name: 🔨 Build Project
+      - name: Instalar extensões PHP necessárias
         run: |
-          npm install
-          npm run build
+          sudo apt-get install -y unzip
+          sudo apt-get install -y libzip-dev
+          sudo apt-get install -y zip
+          sudo apt-get install -y libssl-dev
+          sudo apt-get install -y libcurl4-openssl-dev
+          pecl install xdebug
+          docker-php-ext-enable xdebug
+          docker-php-ext-install zip
+        # Dependendo das extensões PHP necessárias para o seu projeto Laravel, você pode precisar ajustar esta seção.
   
+      - name: Instalar Composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  
+      - name: Copiar .env.example
+        run: cp .env.example .env
+  
+      - name: Gerar chave do Laravel
+        run: php artisan key:generate
+  
+      - name: Executar composer install
+        run: composer install
+    
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
