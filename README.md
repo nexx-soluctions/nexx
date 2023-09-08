@@ -1,7 +1,5 @@
 # NEXX PROJECT
 
-teste branch rule 3
-
 Link web: [Link](https://nexx.lobofoltran.com "Link")
 
 # Como testar a aplicação
