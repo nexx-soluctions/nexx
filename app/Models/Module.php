@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Session;
 
 class Module extends Model
 {
@@ -26,5 +27,10 @@ class Module extends Model
     public function enterprises(): BelongsToMany
     {
         return $this->belongsToMany(Enterprise::class, 'enterprise_has_modules');
+    }
+
+    public function signModule(): void
+    {
+        Session::put('module_connected', $this);
     }
 }

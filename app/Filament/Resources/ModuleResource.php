@@ -38,11 +38,11 @@ class ModuleResource extends Resource
             ->schema([
                 Section::make('Informações do Módulo')
                     ->schema([
-                        Forms\Components\TextInput::make('acronym')
-                            ->label('Sigla')
-                            ->required(),
                         Forms\Components\TextInput::make('name')
                             ->label('Nome')
+                            ->required(),
+                        Forms\Components\TextInput::make('acronym')
+                            ->label('Sigla')
                             ->required(),
                         Forms\Components\Toggle::make('active')
                             ->label('Ativo')

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('attraction_entities', function (Blueprint $table) {
             $table->id();
             $table->boolean('active')->default(true);
-            $table->enum('status', []);
+            $table->enum('status', ['123', '23']);
             $table->string('name');
             $table->foreignId('attraction_id')->constrained();
             $table->timestamps();
