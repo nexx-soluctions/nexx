@@ -10,7 +10,7 @@ use Flowframe\Trend\TrendValue;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Collection;
 
-class BlogPostsChart extends ChartWidget
+class ChamadosChart extends ChartWidget
 {
     protected static ?int $sort = 1;
 

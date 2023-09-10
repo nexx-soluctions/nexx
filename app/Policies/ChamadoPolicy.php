@@ -13,7 +13,11 @@ class ChamadoPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        if (!session()->get('module_connected')) {
+            return false;
+        }
+
+        return $user->enterprise->modules->contains('acronym', 'CHMD') && session()->get('module_connected')->acronym === 'CHMD';
     }
 
     /**

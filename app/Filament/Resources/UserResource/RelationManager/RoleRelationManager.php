@@ -27,6 +27,7 @@ class RoleRelationManager extends BaseRoleRelationManager
             ->columns([
                 TextColumn::make('name')
                     ->searchable()
+                    ->preload()
                     ->label(__('filament-spatie-roles-permissions::filament-spatie.field.name')),
                 TextColumn::make('guard_name')
                     ->searchable()

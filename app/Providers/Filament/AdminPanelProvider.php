@@ -6,11 +6,8 @@ use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugi
 use Amendozaaguiar\FilamentRouteStatistics\FilamentRouteStatisticsPlugin;
 use App\Filament\Auth\Login;
 use App\Filament\Pages\Dashboard;
-use App\Filament\Pages\HealthCheckResults;
 use App\Http\Middleware\EnterpriseMiddleware;
 use App\Http\Middleware\ModuleMiddleware;
-use BezhanSalleh\FilamentExceptions\Facades\FilamentExceptions;
-use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
 use BezhanSalleh\FilamentLanguageSwitch\FilamentLanguageSwitchPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -20,9 +17,7 @@ use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Assets\Css;
 use Filament\Support\Colors\Color;
-use Filament\Support\Facades\FilamentAsset;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -30,11 +25,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use RickDBCN\FilamentEmail\FilamentEmail;
-use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
-use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -52,8 +45,7 @@ class AdminPanelProvider extends PanelProvider
             NavigationGroup::make()
                 ->label('Extras'),
             NavigationGroup::make()
-                ->label('Chamados')
-                ->collapsed(),
+                ->label('Chamados'),
             NavigationGroup::make()
                 ->label('Gerenciamento'),
             NavigationGroup::make()
@@ -66,10 +58,10 @@ class AdminPanelProvider extends PanelProvider
     private function getPanelNavigationItems(): array
     {
         return [
-            NavigationItem::make('suporte.dev')
-                ->url('https://suporte.dev', true)
-                ->icon('heroicon-o-arrow-top-right-on-square')
-                ->group('Links'),
+            // NavigationItem::make('suporte.dev')
+            //     ->url('https://suporte.dev', true)
+            //     ->icon('heroicon-o-arrow-top-right-on-square')
+            //     ->group('Links')
         ];
     }
 
@@ -84,11 +76,11 @@ class AdminPanelProvider extends PanelProvider
             // new FilamentEmail,
             FilamentLanguageSwitchPlugin::make()->renderHookName('panels::user-menu.before'),
             FilamentRouteStatisticsPlugin::make(),
-            FilamentAuthenticationLogPlugin::make(),
-            FilamentExceptionsPlugin::make(),
+            // FilamentAuthenticationLogPlugin::make(),
+            // FilamentExceptionsPlugin::make(),
             FilamentSpatieRolesPermissionsPlugin::make(),
-            FilamentSpatieLaravelHealthPlugin::make()
-                ->usingPage(HealthCheckResults::class),
+            // FilamentSpatieLaravelHealthPlugin::make()
+            //     ->usingPage(HealthCheckResults::class),
         ];
     }
 

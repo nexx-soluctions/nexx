@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class EntepriseHasModule extends Pivot
+class EnterpriseModule extends Pivot
 {
     use HasFactory, SoftDeletes;
+
+    protected $table = 'enterprise_has_modules';
 }

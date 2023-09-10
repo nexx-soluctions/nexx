@@ -2,7 +2,7 @@
 
 namespace App\Filament\Pages;
 
-use App\Filament\Widgets\BlogPostsChart;
+use App\Filament\Widgets\ChamadosChart;
 use App\Filament\Widgets\ChangeModule;
 use Filament\Pages\Dashboard as BasePage;
 use Filament\Widgets\AccountWidget;
@@ -14,10 +14,19 @@ class Dashboard extends BasePage
      */
     public function getWidgets(): array
     {
-        return [
+        $widgets = [
             AccountWidget::class,
             ChangeModule::class,
-            BlogPostsChart::class,
         ];
+
+        $modulo = session()->get('module_connected')->acronym;
+
+        if ($modulo === 'CHMD') {
+            $widgets = array_merge($widgets, [
+                ChamadosChart::class,
+            ]);
+        }
+
+        return $widgets;
     }
 }

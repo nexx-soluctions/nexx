@@ -3,6 +3,7 @@
 namespace App\Models\Modules\ComercialAutomation;
 
 use App\Models\Modules\ModularModel;
+use App\Policies\AttractionPolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Attraction extends ModularModel
 {
     use HasFactory, SoftDeletes;
+
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        Attraction::class => AttractionPolicy::class,
+    ];
 
     /**
      * The attributes that are mass assignable.

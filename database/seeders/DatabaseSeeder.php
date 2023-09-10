@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             EnterpriseUserSeeder::class,
             ModuleSeeder::class,
-            EntepriseHasModuleSeeder::class,
+            EnterpriseModuleSeeder::class,
             ChamadoCategorySeeder::class,
             ChamadoSeeder::class,
         ]);

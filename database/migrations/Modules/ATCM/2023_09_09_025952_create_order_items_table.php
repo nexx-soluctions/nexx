@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\OrderItemsStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['Teste1', 'Teste2']);
+            $table->enum('status', OrderItemsStatus::options());
             $table->string('value');
             $table->integer('amount');
             $table->string('observations');

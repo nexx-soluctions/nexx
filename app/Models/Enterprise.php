@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Policies\EnterprisePolicy;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +34,15 @@ class Enterprise extends Model
         'db_port',
         'db_user',
         'db_password',
+    ];
+
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        Enterprise::class => EnterprisePolicy::class,
     ];
 
     public function users(): HasMany

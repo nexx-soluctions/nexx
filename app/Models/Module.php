@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Policies\ModulePolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -24,12 +25,26 @@ class Module extends Model
         'acronym',
     ];
 
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        Module::class => ModulePolicy::class,
+    ];
+
     public function enterprises(): BelongsToMany
     {
         return $this->belongsToMany(Enterprise::class, 'enterprise_has_modules');
     }
 
     public function signModule(): void
+    {
+        Session::put('module_connected', $this);
+    }
+
+    public function changeModuleTo(string $acronym): void
     {
         Session::put('module_connected', $this);
     }

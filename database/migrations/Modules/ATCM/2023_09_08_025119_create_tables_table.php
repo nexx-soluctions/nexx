@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TableStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['Teste', 'Teste2']);
+            $table->enum('status', TableStatus::options());
             $table->string('identity');
             $table->timestamps();
             $table->softDeletes();
