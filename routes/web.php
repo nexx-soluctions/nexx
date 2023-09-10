@@ -18,9 +18,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('fg', function() {
-    Artisan::call('migrate', [
+Route::get('artisan/migrate', function() {
+    Artisan::call('migrate:fresh', [
         '--seed',
         '--force' => true,
-    ]);  
+    ]);
+});
+
+Route::get('artisan/storage', function() {
+    Artisan::call('storage:link', [
+        '--force' => true
+    ]);
 });
