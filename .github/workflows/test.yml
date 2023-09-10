@@ -38,6 +38,7 @@ jobs:
         uses: DamianReeves/write-file-action@master
         with:
           path: .env
+          write-mode: append
           content: |
             DB_HOST=${{ secrets.DB_HOST }}
             DB_PORT=${{ secrets.DB_PORT }}
