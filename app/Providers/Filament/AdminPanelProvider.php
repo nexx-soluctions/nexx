@@ -7,6 +7,8 @@ use Amendozaaguiar\FilamentRouteStatistics\FilamentRouteStatisticsPlugin;
 use App\Filament\Auth\Login;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\HealthCheckResults;
+use App\Http\Middleware\EnterpriseMiddleware;
+use App\Http\Middleware\ModuleMiddleware;
 use BezhanSalleh\FilamentExceptions\Facades\FilamentExceptions;
 use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
 use BezhanSalleh\FilamentLanguageSwitch\FilamentLanguageSwitchPlugin;
@@ -40,14 +42,24 @@ class AdminPanelProvider extends PanelProvider
     {
         return [
             NavigationGroup::make()
+                ->label('Extrato'),
+            NavigationGroup::make()
+                ->label('Pagamentos'),
+            NavigationGroup::make()
+                ->label('Pedidos'),
+            NavigationGroup::make()
+                ->label('Atrações'),
+            NavigationGroup::make()
+                ->label('Extras'),
+            NavigationGroup::make()
                 ->label('Chamados')
                 ->collapsed(),
             NavigationGroup::make()
                 ->label('Gerenciamento'),
             NavigationGroup::make()
-                ->label('Links'),
+                ->label('Estatísticas'),
             NavigationGroup::make()
-                ->label('Estatísticas')
+                ->label('Links'),
         ];
     }
 
@@ -69,11 +81,11 @@ class AdminPanelProvider extends PanelProvider
     private function getPanelPluguins(): array
     {
         return [
+            // new FilamentEmail,
             FilamentLanguageSwitchPlugin::make()->renderHookName('panels::user-menu.before'),
             FilamentRouteStatisticsPlugin::make(),
             FilamentAuthenticationLogPlugin::make(),
             FilamentExceptionsPlugin::make(),
-            // new FilamentEmail,
             FilamentSpatieRolesPermissionsPlugin::make(),
             FilamentSpatieLaravelHealthPlugin::make()
                 ->usingPage(HealthCheckResults::class),
@@ -133,6 +145,8 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                EnterpriseMiddleware::class,
+                ModuleMiddleware::class,        
             ])
             ->authMiddleware([
                 Authenticate::class,

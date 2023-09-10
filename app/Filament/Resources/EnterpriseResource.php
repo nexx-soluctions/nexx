@@ -6,14 +6,18 @@ use App\Filament\Resources\EnterpriseResource\Pages;
 use App\Filament\Resources\EnterpriseResource\RelationManager\ModulesRelationManager;
 use App\Filament\Resources\EnterpriseResource\RelationManager\UsersRelationManager;
 use App\Models\Enterprise;
+use Filament\Tables\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
@@ -135,6 +139,28 @@ class EnterpriseResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Action::make('migrate')
+                    ->label('Executar Migration')
+                    ->icon('heroicon-o-circle-stack')
+                    ->color(Color::Orange)
+                    ->action(function(Enterprise $enterprise) {
+                        try {
+                            $enterprise->executeMigration();
+
+                            Notification::make()
+                                ->title('Executado com sucesso')
+                                ->body('Migração do banco de dados realizada com sucesso.')
+                                ->success()
+                                ->send();
+                        } catch (\Throwable $th) {
+                            Notification::make()
+                                ->title('Erro ao executar a migração')
+                                ->body('Falha ao se conectar com o banco de dados.')
+                                ->warning()
+                                ->send();
+                        }
+                    })
+                    ->requiresConfirmation(),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])

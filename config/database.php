@@ -35,6 +35,34 @@ return [
 
     'connections' => [
 
+        // 'db_enterprise' => [
+        //     'driver' => 'sqlite',
+        //     'url' => env('DATABASE_URL'),
+        //     'database' => env('DB_DATABASE', database_path('database_enterprise.sqlite')),
+        //     'prefix' => '',
+        //     'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        // ],
+
+        'db_enterprise' => [
+            'driver'   => 'mysql',
+            'url'      => env('DATABASE_ENTERPRISE_URL'),
+            'host'     => env('DB_ENTERPRISE_HOST', '127.0.0.1'),
+            'port'     => env('DB_ENTERPRISE_PORT', '3306'),
+            'database' => env('DB_ENTERPRISE_DATABASE', 'forge'),
+            'username' => env('DB_ENTERPRISE_USERNAME', 'forge'),
+            'password' => env('DB_ENTERPRISE_PASSWORD', ''),
+            'unix_socket' => env('DB_ENTERPRISE_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
