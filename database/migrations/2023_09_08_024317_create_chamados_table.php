@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('contact')->nullable();
             $table->string('place');
             $table->string('problem');
-            $table->foreignId('chamado_category_id')->constrained();
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreignId('chamado_category_id')->constrained();
         });
     }
 

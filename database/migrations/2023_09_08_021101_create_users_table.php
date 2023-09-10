@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('enterprise_id')->constrained();
             $table->softDeletes();
+            $table->foreignId('enterprise_id')->constrained();
         });
     }
 

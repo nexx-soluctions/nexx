@@ -7,6 +7,7 @@ use App\Policies\ChamadoPolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chamado extends Model
@@ -41,4 +42,12 @@ class Chamado extends Model
     {
         return $this->belongsTo(ChamadoCategory::class);
     }
+
+    // /**
+    //  * Get the Enterprise for the Chamado.
+    //  */
+    // public function enterprise(): BelongsTo
+    // {
+    //     return $this->belongsTo(Enterprise::class);
+    // }
 }

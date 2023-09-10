@@ -2,17 +2,25 @@
 
 namespace App\Providers\Filament;
 
+use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
+use Amendozaaguiar\FilamentRouteStatistics\FilamentRouteStatisticsPlugin;
 use App\Filament\Auth\Login;
 use App\Filament\Pages\Dashboard;
+use App\Filament\Pages\HealthCheckResults;
+use BezhanSalleh\FilamentExceptions\Facades\FilamentExceptions;
+use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
 use BezhanSalleh\FilamentLanguageSwitch\FilamentLanguageSwitchPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\Support\Assets\Css;
 use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentAsset;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -22,6 +30,9 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use RickDBCN\FilamentEmail\FilamentEmail;
+use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
+use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -34,36 +45,18 @@ class AdminPanelProvider extends PanelProvider
             NavigationGroup::make()
                 ->label('Gerenciamento'),
             NavigationGroup::make()
-                ->label('Links')
-                ->icon('heroicon-o-arrow-top-right-on-square'),
+                ->label('Links'),
+            NavigationGroup::make()
+                ->label('Estatísticas')
         ];
     }
 
     private function getPanelNavigationItems(): array
     {
         return [
-            NavigationItem::make('Empresas')
-                ->icon('heroicon-o-building-office')
-                ->badge('Em breve')
-                ->group('Gerenciamento'),
-            NavigationItem::make('Módulos')
-                ->icon('heroicon-o-table-cells')
-                ->badge('Em breve')
-                ->group('Gerenciamento'),
-            NavigationItem::make('Usuários')
-                ->icon('heroicon-o-users')
-                ->badge('Em breve')
-                ->group('Gerenciamento'),
-            NavigationItem::make('Papéis')
-                ->icon('heroicon-o-square-3-stack-3d')
-                ->badge('Em breve')
-                ->group('Gerenciamento'),
-            NavigationItem::make('Permissões')
-                ->icon('heroicon-o-shield-check')
-                ->badge('Em breve')
-                ->group('Gerenciamento'),
             NavigationItem::make('suporte.dev')
                 ->url('https://suporte.dev', true)
+                ->icon('heroicon-o-arrow-top-right-on-square')
                 ->group('Links'),
         ];
     }
@@ -77,6 +70,13 @@ class AdminPanelProvider extends PanelProvider
     {
         return [
             FilamentLanguageSwitchPlugin::make()->renderHookName('panels::user-menu.before'),
+            FilamentRouteStatisticsPlugin::make(),
+            FilamentAuthenticationLogPlugin::make(),
+            FilamentExceptionsPlugin::make(),
+            // new FilamentEmail,
+            FilamentSpatieRolesPermissionsPlugin::make(),
+            FilamentSpatieLaravelHealthPlugin::make()
+                ->usingPage(HealthCheckResults::class),
         ];
     }
 
@@ -105,6 +105,24 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
+            ->userMenuItems([
+                // MenuItem::make()
+                // ->label('Preferências')
+                // ->icon('heroicon-o-cog-6-tooth'),
+                'logout' => MenuItem::make()->label('Sair'),
+            ])
+            // ->tenant(Enterprise::class)
+            // ->tenantMiddleware([
+            //     ApplyTenantScopes::class,
+            // ], isPersistent: true)
+    
+            // ->requiresTenantSubscription()
+            // ->tenantMenuItems([
+            //     MenuItem::make()
+            //         ->label('Settings')
+            //         ->icon('heroicon-m-cog-8-tooth'),
+            //     // ...
+            // ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
