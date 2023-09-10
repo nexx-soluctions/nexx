@@ -8,10 +8,16 @@
     </style>
     <x-slot name="trigger" class="">
         <div
-            class="flex items-center justify-center w-9 h-9 font-semibold text-sm text-white rounded-full language-switch-trigger bg-primary-500 dark:text-primary-500 dark:bg-gray-900 ring-1 ring-inset ring-gray-950/10 dark:ring-white/20">
-            {{ \Illuminate\Support\Str::of(app()->getLocale())->length() > 2
-                ? \Illuminate\Support\Str::of(app()->getLocale())->substr(0, 2)->upper()
-                : \Illuminate\Support\Str::of(app()->getLocale())->upper() }}
+            class="flex items-center justify-center w-9 h-9 font-semibold text-sm text-white rounded-full language-switch-trigger dark:text-primary-500 dark:bg-gray-900">                
+                @php
+                    $supportedLocales = ['en' => 'us', 'pt-BR' => 'br', 'es' => 'es', 'fr' => 'fr'];
+                    $locale = app()->getLocale();
+                    $component = 'flag-1x1-' . (isset($supportedLocales[$locale]) ? $supportedLocales[$locale] : 'br');
+                @endphp
+                <x-dynamic-component :component="$component"
+                    class="flex-shrink-0 w-6 h-6  group-hover:text-white group-focus:text-white text-primary-500"
+                    style="border-radius: 0.25rem" 
+                />
         </div>
     </x-slot>
     <x-filament::dropdown.list class="!border-t-0">
@@ -44,7 +50,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('filament-language-changed', () => {
-                console.log('Language changed');
                 location.reload(true);
             });
         })

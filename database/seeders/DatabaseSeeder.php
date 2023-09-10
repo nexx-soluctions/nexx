@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             EnterpriseSeeder::class,
             LandingPageSeeder::class,
             UserSeeder::class,
+            EnterpriseUserSeeder::class,
             ModuleSeeder::class,
             EntepriseHasModuleSeeder::class,
             ChamadoCategorySeeder::class,
