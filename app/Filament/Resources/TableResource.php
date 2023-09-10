@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\TableStatus;
 use App\Filament\Resources\TableResource\Pages;
 use App\Filament\Resources\TableResource\RelationManagers;
 use App\Models\Modules\ComercialAutomation\Table as ComercialAutomationTable;
@@ -13,6 +14,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TableResource extends Resource
 {
@@ -38,7 +42,7 @@ class TableResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('status')
                             ->label('Status')
-                            ->options(['Teste' => 'Teste', 'Teste2' => 'Teste2'])
+                            ->options(TableStatus::options(1))
                             ->required(),
                         Forms\Components\TextInput::make('identity')
                             ->label('Identificação')
@@ -55,13 +59,22 @@ class TableResource extends Resource
                     ->label('#')
                     ->sortable()
                     ->alignCenter(),
-                Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
-                    ->sortable()
-                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('identity')
                     ->label('Identificação')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->sortable()
+                    ->alignCenter()
+                    ->color(function (string $state): string {
+                        return match ($state) {
+                            'available' => 'success',
+                            'in_use' => 'warning',
+                            'disabled' => 'danger',
+                        };
+                    })
+                    ->translateLabel(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Criado em')
                     ->dateTime()
@@ -80,8 +93,14 @@ class TableResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
+            ->headerActions([
+                ExportAction::make()
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()->exports([
+                        ExcelExport::make()
+                    ]),
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),

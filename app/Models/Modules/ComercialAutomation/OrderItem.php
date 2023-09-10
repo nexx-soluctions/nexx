@@ -3,6 +3,7 @@
 namespace App\Models\Modules\ComercialAutomation;
 
 use App\Models\Modules\ModularModel;
+use App\Policies\OrderItemPolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class OrderItem extends ModularModel
 {
     use HasFactory, SoftDeletes;
+
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        OrderItem::class => OrderItemPolicy::class,
+    ];
 
     /**
      * The attributes that are mass assignable.

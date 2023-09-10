@@ -3,6 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CardResource\Pages;
+use App\Filament\Resources\CardResource\RelationManager\AttractionQueuesRelationManager;
+use App\Filament\Resources\CardResource\RelationManager\OrderRelationManager;
+use App\Filament\Resources\CardResource\RelationManager\PaymentRelationManager;
 use App\Filament\Resources\CardResource\RelationManagers;
 use App\Models\Modules\ComercialAutomation\Card;
 use Filament\Forms;
@@ -13,6 +16,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class CardResource extends Resource
 {
@@ -82,8 +88,14 @@ class CardResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
+            ->headerActions([
+                ExportAction::make()
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()->exports([
+                        ExcelExport::make()
+                    ]),
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
@@ -97,7 +109,9 @@ class CardResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OrderRelationManager::class,
+            PaymentRelationManager::class,
+            AttractionQueuesRelationManager::class,
         ];
     }
     

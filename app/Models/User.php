@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
+use App\Policies\UserPolicy;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Support\Collection;
@@ -22,6 +23,15 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, AuthenticationLoggable, HasRoles, HasSuperAdmin;
+
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        User::class => UserPolicy::class,
+    ];
 
     /**
      * The attributes that are mass assignable.

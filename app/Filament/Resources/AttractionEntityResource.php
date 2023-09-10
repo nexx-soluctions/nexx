@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\AttractionsEntityStatus;
 use App\Filament\Resources\AttractionEntityResource\Pages;
 use App\Filament\Resources\AttractionEntityResource\RelationManagers;
 use App\Models\Modules\ComercialAutomation\AttractionEntity;
@@ -13,6 +14,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class AttractionEntityResource extends Resource
 {
@@ -39,10 +43,11 @@ class AttractionEntityResource extends Resource
                     Forms\Components\Select::make('attraction_id')
                         ->label('Atração')
                         ->relationship('attraction', 'name')
-                        ->searchable(),
+                        ->searchable()
+                        ->preload(),
                     Forms\Components\Select::make('status')
                         ->label('Status')
-                        ->options(['123' => '123', '23' => '23']),
+                        ->options(AttractionsEntityStatus::options(1)),
                     Forms\Components\TextInput::make('name')
                         ->label('Nome')
                         ->required(),
@@ -99,8 +104,14 @@ class AttractionEntityResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
+            ->headerActions([
+                ExportAction::make()
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()->exports([
+                        ExcelExport::make()
+                    ]),
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),

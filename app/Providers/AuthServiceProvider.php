@@ -5,6 +5,8 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\User;
+use App\Policies\RouteStatisticPolicy;
+use Bilfeldt\LaravelRouteStatistics\Models\RouteStatistic;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        RouteStatistic::class => RouteStatisticPolicy::class,
     ];
 
     /**

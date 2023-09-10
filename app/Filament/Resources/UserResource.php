@@ -140,7 +140,6 @@ class UserResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     ExportBulkAction::make()->exports([
                         ExcelExport::make()
-                            ->askForFilename()
                     ]),
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),

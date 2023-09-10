@@ -12,6 +12,22 @@ class ModuleSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Module::factory()->create([
+            'name' => 'Configurador',
+            'acronym' => 'ADM',
+            'active' => true,
+        ]);
+
+        \App\Models\Module::factory()->create([
+            'name' => 'Automação Comercial',
+            'acronym' => 'ATCM',
+            'active' => true,
+        ]);
+
+        \App\Models\Module::factory()->create([
+            'name' => 'Chamados',
+            'acronym' => 'CHMD',
+            'active' => true,
+        ]);
     }
 }

@@ -34,7 +34,7 @@ return [
     | Bilfeldt\RequestLogger\Contracts\RequestLoggerInterface
     |
     */
-    'model' => env('ROUTE_STATISTICS_MODEL', \Bilfeldt\LaravelRouteStatistics\Models\RouteStatistic::class),
+    'model' => env('ROUTE_STATISTICS_MODEL', App\Models\RouteStatistic::class),
 
     /*
     |--------------------------------------------------------------------------
