@@ -31,8 +31,9 @@ class AppServiceProvider extends ServiceProvider
             EnvironmentCheck::new(),
         ]);
 
-        FilamentAsset::register([
-            Css::make('scrollbar', __DIR__ . 'scrollbar'),
-        ]);
+        // Erro no filament:upgrade
+        // FilamentAsset::register([
+        //     Css::make('scrollbar', __DIR__ . 'scrollbar'),
+        // ]);
     }
 }
