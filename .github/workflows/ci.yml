@@ -14,7 +14,8 @@ jobs:
       - name: Get latest code
         uses: actions/checkout@v2.3.2
 
-      - uses: actions/setup-node@master
+      - name: Setup Node.JS
+        uses: actions/setup-node@master
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -26,7 +27,7 @@ jobs:
 
       - name: Setup Permissions
         run: chmod -R 777 storage bootstrap/cache
-        
+
       - name: Building frontend dependencies
         run: |
           npm install
