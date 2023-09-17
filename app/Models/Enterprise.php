@@ -65,7 +65,7 @@ class Enterprise extends Model
             $this->connect(false);    
             
             foreach ($this->modules as $key => $module) {
-                Artisan::call('migrate:fresh', [
+                Artisan::call('migrate', [
                     '--database' => 'db_enterprise',
                     '--path'     => "database/migrations/Modules/{$module->acronym}",
                     '--force'    => true, 

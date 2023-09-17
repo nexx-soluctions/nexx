@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use Filament\Support\Assets\Css;
-use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Health\Checks\Checks\DebugModeCheck;
 use Spatie\Health\Checks\Checks\EnvironmentCheck;
@@ -30,10 +28,5 @@ class AppServiceProvider extends ServiceProvider
             DebugModeCheck::new(),
             EnvironmentCheck::new(),
         ]);
-
-        // Erro no filament:upgrade
-        // FilamentAsset::register([
-        //     Css::make('scrollbar', __DIR__ . 'scrollbar'),
-        // ]);
     }
 }
