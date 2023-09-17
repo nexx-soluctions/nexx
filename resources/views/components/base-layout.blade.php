@@ -9,7 +9,7 @@
         @else
             <title>{{ config('app.name') }}</title>
         @endif
-		<link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
+		<link rel="icon" type="image/x-icon" href="{{ url(asset('favicon.ico')) }}">
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])

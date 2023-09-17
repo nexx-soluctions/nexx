@@ -8,6 +8,7 @@ use App\Filament\Auth\Login;
 use App\Filament\Pages\Dashboard;
 use App\Http\Middleware\EnterpriseMiddleware;
 use App\Http\Middleware\ModuleMiddleware;
+use App\Http\Middleware\NavigationItemsMiddleware;
 use BezhanSalleh\FilamentLanguageSwitch\FilamentLanguageSwitchPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -142,6 +143,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                NavigationItemsMiddleware::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
