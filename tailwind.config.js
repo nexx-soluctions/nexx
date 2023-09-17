@@ -1,7 +1,7 @@
-import preset from './vendor/filament/support/tailwind.config.preset'
+// import preset from './vendor/filament/support/tailwind.config.preset'
 
 export default {
-    presets: [preset],
+    // presets: [preset],
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
