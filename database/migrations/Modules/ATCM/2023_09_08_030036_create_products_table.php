@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('atm_categories_product_id')->constrained();
             $table->boolean('active')->default(true);
             $table->string('name');
             $table->string('description');
