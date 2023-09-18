@@ -51,5 +51,4 @@ class OrderItem extends ModularModel
     {
         return $this->belongsTo(Attraction::class);
     }
-
 }
